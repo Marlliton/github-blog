@@ -4,7 +4,7 @@ export function ProfileCard() {
   return (
     <div
       className={`
-        w-full max-w-6xl my-0 mx-auto flex flex-col md:flex-row bg-base-profile p-7 rounded-lg md:-mt-24
+        w-full max-w-6xl my-0 mx-auto flex flex-col md:flex-row bg-base-profile p-7 rounded-lg md:-mt-36
         gap-8
     `}
     >
@@ -28,23 +28,23 @@ export function ProfileCard() {
               GITHUB <ArrowSquareOut size={20} />
             </a>
           </span>
-          <p>
+          <h1>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Totam sint accusamus
             culpa quaerat adipisci corporis magni. Repellat, sapiente.
-          </p>
+          </h1>
         </div>
         <div className="flex gap-2 md:gap-5 pt-5">
           <div className="flex itens-center justify-center leading-none gap-2">
             <GithubLogo size={18} weight="fill" className="text-base-label" />
-            <span className="mt-1">Marlltion</span>
+            <span className="mt-[2px]">Marlltion</span>
           </div>
           <div className="flex itens-center leading-none gap-2">
             <Buildings size={18} weight="fill" className="text-base-label" />
-            <span className="mt-1">Cod3r</span>
+            <span className="mt-[2px]">Cod3r</span>
           </div>
           <div className="flex itens-center leading-none gap-2">
             <Users size={18} weight="fill" className="text-base-label" />
-            <span className="mt-1">22</span>
+            <span className="mt-[2px]">22</span>
           </div>
         </div>
       </div>

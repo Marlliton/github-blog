@@ -1,4 +1,5 @@
 import { ProfileCard } from "./ProfileCard";
+import { PostCard } from "./PosCard";
 
 export function Home() {
   return (
@@ -23,6 +24,19 @@ export function Home() {
             placeholder="Buscar Projeto"
           />
         </form>
+
+        <main
+          className={`
+          flex flex-wrap gap-8 pt-12
+        `}
+        >
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+          <PostCard />
+        </main>
       </div>
     </div>
   );
