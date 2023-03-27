@@ -1,8 +1,25 @@
+import { useParams } from "react-router-dom";
 import { PostInfo } from "./PostInfo";
 import SyntaxHighlighter from "react-syntax-highlighter";
 import { agate } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useCallback, useEffect, useState } from "react";
+import { http } from "../../lib/axios";
 
 export function Post() {
+  const [post, setPost] = useState<any>();
+  const { name } = useParams();
+  console.log("🚀 ~ file: Post.tsx:8 ~ Post ~ name:", name);
+
+  const loadPost = useCallback(() => {
+    http.get(`repos/marlliton/${name}`).then((res) => setPost(res.data));
+  }, [name]);
+
+  useEffect(() => {
+    if (name) {
+      loadPost();
+    }
+  }, [name, loadPost]);
+
   const customStyle = {
     backgroundColor: "#112131",
     borderRadius: "8px",
@@ -10,20 +27,9 @@ export function Post() {
   };
   return (
     <div className="w-full max-w-6xl my-0 mx-auto">
-      <PostInfo />
+      {post && <PostInfo name={post.name} urlProject={post.html_url} />}
       <div className="flex flex-col gap-3 p-10">
-        <p>
-          Programming languages all have built-in data structures, but these often differ
-          from one language to another. This article attempts to list the built-in data
-          structures available in JavaScript and what properties they have. These can be
-          used to build other data structures. Wherever possible, comparisons with other
-          languages are drawn
-        </p>
-        <p>
-          Dynamic typing JavaScript is a loosely typed and dynamic language. Variables in
-          JavaScript are not directly associated with any particular value type, and any
-          variable can be assigned (and re-assigned) values of all types:
-        </p>
+        <p>{post && post.description}</p>
       </div>
       <SyntaxHighlighter language="javascript" style={agate} customStyle={customStyle}>
         {`

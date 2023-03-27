@@ -6,7 +6,12 @@ import {
   GithubLogo,
 } from "phosphor-react";
 
-export function PostInfo() {
+interface PostInfoProps {
+  name: string;
+  urlProject: string;
+}
+
+export function PostInfo({ name, urlProject }: PostInfoProps) {
   return (
     <div
       className={`
@@ -25,14 +30,14 @@ export function PostInfo() {
             </a>
             <a
               className="flex leading-none items-center gap-1 text-blue-link text-xs"
-              href="https://github.com/marlliton"
+              href={`${urlProject}`}
+              target="_blank"
+              rel="noreferrer"
             >
               GITHUB <ArrowSquareOut size={20} />
             </a>
           </span>
-          <h1 className="text-xl font-bold md:text-2xl">
-            JavaScript data types and data structures
-          </h1>
+          <h1 className="text-xl font-bold md:text-2xl">{name}</h1>
         </div>
         <div className="flex gap-2 md:gap-5 pt-5">
           <div className="flex itens-center justify-center leading-none gap-2">

@@ -1,7 +1,33 @@
 import { ProfileCard } from "./ProfileCard";
 import { PostCard } from "./PosCard";
+import { useEffect, useState } from "react";
+import { http } from "../../lib/axios";
 
 export function Home() {
+  const [posts, setPosts] = useState<any[]>([]);
+
+  function loadPosts() {
+    http
+      .get("/users/marlliton/repos?type=public&per_page=10&page=1")
+      .then((res) => setPosts([...res.data]));
+  }
+
+  function filter(query: string) {
+    if (query.length) {
+      const list = posts.filter(
+        (post) => post?.name?.includes(query) || post?.description?.includes(query)
+      );
+
+      setPosts(list);
+    } else {
+      loadPosts();
+    }
+  }
+
+  useEffect(() => {
+    loadPosts();
+  }, []);
+
   return (
     <div className={`flex flex-col`}>
       <ProfileCard />
@@ -22,6 +48,7 @@ export function Home() {
           `}
             type="text"
             placeholder="Buscar Projeto"
+            onChange={(e) => filter(e.target.value)}
           />
         </form>
 
@@ -30,12 +57,10 @@ export function Home() {
           flex flex-wrap gap-8 pt-12
         `}
         >
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
-          <PostCard />
+          {posts &&
+            posts.map((post) => (
+              <PostCard name={post.name} description={post.description} key={post.id} />
+            ))}
         </main>
       </div>
     </div>
